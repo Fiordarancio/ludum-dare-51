@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 8347777781243658548}
   - component: {fileID: 3681899580780855488}
   - component: {fileID: 8856195634681318792}
+  - component: {fileID: 6863708870332834504}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Wolf
@@ -146,12 +147,26 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.01
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &6863708870332834504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605794426480924674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b7d30579c11224b92420013949fd4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  nextWaypointDistance: 1

@@ -6,7 +6,7 @@ using Pathfinding;
 public class WolfAI : MonoBehaviour
 {
     
-    public float speed = 30f;
+    public float speed = 3f;
     public float nextWaypointDistance = 1f;
 
     Transform target = null;
