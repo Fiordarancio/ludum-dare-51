@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
 
     public float rainInterval = 10f;
-    private float timeLeft = 0f;
 
     bool isRaining = false;
 
@@ -24,6 +23,10 @@ public class GameManager : MonoBehaviour
     private void OnDestroy() 
     {
         StopAllCoroutines();
+    }
+    private void OnDisable() 
+    {
+        StopAllCoroutines();    
     }
 
     // Update is called once per frame

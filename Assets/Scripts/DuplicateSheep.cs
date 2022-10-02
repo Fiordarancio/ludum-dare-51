@@ -31,7 +31,7 @@ public class DuplicateSheep : MonoBehaviour
     }
 
     // Event to undestand if rain affected the sheep. Infection is controlled by game manager
-    public void onInfect (bool infect)
+    private void onInfect (bool infect)
     {
         isInfected = infect;
         if (isInfected == true)
@@ -41,6 +41,12 @@ public class DuplicateSheep : MonoBehaviour
         }
         // else
         //     StopAllCoroutines(); // Shouldn't be necessary
+    }
+
+    // Unsubscribe from InfectionEvent when destroyed or an error will popup
+    private void OnDisable() 
+    {
+        GameManager.InfectionEvent -= onInfect;    
     }
 
     // Thread for duplicating sheeps every 10 seconds

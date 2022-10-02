@@ -123,25 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &1492383869 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5349407068209240852, guid: a7b4808e0946fcc48bd327f50ea0891a, type: 3}
-  m_PrefabInstance: {fileID: 1883755535}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1492383874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492383869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad6baf6ee6a3ff64085768d41819e918, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 200
-  rb: {fileID: 0}
 --- !u!1 &1800785965
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,14 +214,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1658679919466336439, guid: a7b4808e0946fcc48bd327f50ea0891a, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1658679919466336439, guid: a7b4808e0946fcc48bd327f50ea0891a, type: 3}
-      propertyPath: infectionTime
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5349407068209240852, guid: a7b4808e0946fcc48bd327f50ea0891a, type: 3}
       propertyPath: m_Name
       value: Sheep
