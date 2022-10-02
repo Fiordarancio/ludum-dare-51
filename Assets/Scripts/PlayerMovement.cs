@@ -15,29 +15,18 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // rb = GetComponent<Rigidbody2D>();
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate() 
     {
         movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        Vector2 force = movement * speed * Time.deltaTime;
+        movement *= speed * Time.deltaTime;
 
-        if (movement.magnitude > 0)
+        if (movement.magnitude > 0.001f)
         {
-            Debug.Log(force);
-
-            // rb.AddForce(force);
-            transform.Translate(force);
-        }
-    }
-
-    private void OnCollisionEnter(Collision other) 
-    {
-        if (other.gameObject.CompareTag("Wall"))
-        {
-            
+            // Debug.Log(movement);
+            transform.Translate(movement);
         }
     }
 }
