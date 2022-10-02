@@ -86,12 +86,15 @@ public class WolfAI : MonoBehaviour
             reachedEndOfPath = false;
         }
 
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - (Vector2)transform.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
-        rb.AddForce(force, ForceMode2D.Impulse);
+        if (force.magnitude > 0.001f)
+            transform.Translate(force);
 
-        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+        // rb.AddForce(force, ForceMode2D.Impulse);
+
+        float distance = Vector2.Distance(transform.position, path.vectorPath[currentWaypoint]);
 
         if (distance < nextWaypointDistance)
             currentWaypoint++;

@@ -17,29 +17,24 @@ public class DuplicateSheep : MonoBehaviour
     
     // TEST
     [Header("Test")]
-    public float every10seconds = 10f;
-    public float mutationTime = 2f;
+    public float infectionTime = 10f;       // Total time in which a mutation or duplication happens
+    public float mutationTime = 2f;         // Time in which we play animation or mutation
 
     // Start is called before the first frame update
     void Start()
     {
         isInfected = false; 
-        every10seconds = (every10seconds > mutationTime)? every10seconds : 3f;
+        infectionTime = (infectionTime > mutationTime)? infectionTime : 3f;
     }
 
-    // Update is called once per frame
-    void Update()
+    // Infection is controlled by game manager
+    public void onInfect (bool infect)
     {
-        
-    }
-
-    public void setInfected ()
-    {
-        isInfected = !isInfected;
+        isInfected = infect;
         if (isInfected == true)
             StartCoroutine(ApplyInfection());
-        // else
-        //     StopAllCoroutines(); // Shouldn't be necessary
+        else
+            StopAllCoroutines(); // Shouldn't be necessary
     }
 
     // Thread for duplicating sheeps every 10 seconds
@@ -47,7 +42,7 @@ public class DuplicateSheep : MonoBehaviour
     {
         while (isInfected) 
         {
-            yield return new WaitForSeconds(every10seconds-mutationTime);
+            yield return new WaitForSeconds(infectionTime-mutationTime);
             // Evaluate probability for spawning wolf (20%)
             bool isWolf = Random.Range(0f, 1f) <= wolfProbability;
             // Instantiate a wolf or a couple of sheep
