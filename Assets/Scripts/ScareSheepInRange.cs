@@ -24,14 +24,17 @@ public class ScareSheepInRange : MonoBehaviour
         // When the dog barks, sheeps in bark range must be pushed away
         if (Input.GetButtonDown("Bark") && sheepInRange.Count > 0)
         {
-            Debug.Log("Bark!");
             foreach (GameObject sheep in sheepInRange)
             {
-                Rigidbody2D sheepRb = sheep.GetComponent<Rigidbody2D>();
-                if (sheepRb != null)
+                // Skip if the sheep has been mutated/destroyed but we had still it in range
+                if (sheep != null)
                 {
-                    barkForce = barkStrength * -(dog.position - sheep.transform.position);
-                    sheepRb.AddForce(barkForce);
+                    Rigidbody2D sheepRb = sheep.GetComponent<Rigidbody2D>();
+                    if (sheepRb != null)
+                    {
+                        barkForce = barkStrength * -(dog.position - sheep.transform.position);
+                        sheepRb.AddForce(barkForce);
+                    }
                 }
             }
         }
@@ -47,7 +50,8 @@ public class ScareSheepInRange : MonoBehaviour
     {
     
         if (other.gameObject.CompareTag("Sheep"))
-            if (sheepInRange.Remove(other.gameObject))
-                Debug.Log("Sheep: "+other.gameObject.name + " removed from sheep in range");
+            sheepInRange.Remove(other.gameObject);
+            // if (sheepInRange.Remove(other.gameObject))
+            //     Debug.Log("Sheep: "+other.gameObject.name + " removed from sheep in range");
     }
 }
