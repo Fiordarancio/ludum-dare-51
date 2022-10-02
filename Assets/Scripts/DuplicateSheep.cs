@@ -62,6 +62,7 @@ public class DuplicateSheep : MonoBehaviour
                 yield return new WaitForSeconds(mutationTime);
                 Instantiate(WolfPrefab, transform.position, transform.rotation);
                 Debug.Log("...done!");
+                isInfected = false;
                 Destroy(this.gameObject);
             }
             else
