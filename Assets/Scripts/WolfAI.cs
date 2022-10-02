@@ -17,7 +17,7 @@ public class WolfAI : MonoBehaviour
     int currentWaypoint;
     bool reachedEndOfPath = false;
 
-    Collision2D contactSheep;
+    Collision2D contactSheep = null;
     float contactTimer = 0f;
 
     // Start is called before the first frame update
@@ -89,10 +89,8 @@ public class WolfAI : MonoBehaviour
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - (Vector2)transform.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
-        if (force.magnitude > 0.001f)
+        if (force.magnitude > 0.001f && contactSheep == null)
             transform.Translate(force);
-
-        // rb.AddForce(force, ForceMode2D.Impulse);
 
         float distance = Vector2.Distance(transform.position, path.vectorPath[currentWaypoint]);
 
@@ -115,10 +113,11 @@ public class WolfAI : MonoBehaviour
             if (contactTimer + eatingTime < Time.time)
             {
                 Debug.Log("Eaten!");
-                Destroy(other.gameObject);
+                Destroy(contactSheep.gameObject);
             } else
             {
                 Debug.Log("Eating!");
+                Debug.Log(Time.time);
             }
         }
     }
