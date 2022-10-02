@@ -6,8 +6,8 @@ using Pathfinding;
 public class WolfAI : MonoBehaviour
 {
     
-    public float speed = 200f;
-    public float nextWaypointDistance = 3f;
+    public float speed = 30f;
+    public float nextWaypointDistance = 1f;
 
     Transform target = null;
     Path path;
@@ -23,7 +23,7 @@ public class WolfAI : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
-        InvokeRepeating("UpdatePath", 0f, 1f);
+        InvokeRepeating("UpdatePath", 0f, 0.2f);
     }
 
     void UpdatePath()
