@@ -25,16 +25,22 @@ public class DuplicateSheep : MonoBehaviour
     {
         isInfected = false; 
         infectionTime = (infectionTime > mutationTime)? infectionTime : 3f;
+
+        // Register for Infect event
+        GameManager.InfectionEvent += onInfect;
     }
 
-    // Infection is controlled by game manager
+    // Event to undestand if rain affected the sheep. Infection is controlled by game manager
     public void onInfect (bool infect)
     {
         isInfected = infect;
         if (isInfected == true)
+        {
+            Debug.Log(gameObject.name + " infected now!");
             StartCoroutine(ApplyInfection());
-        else
-            StopAllCoroutines(); // Shouldn't be necessary
+        }
+        // else
+        //     StopAllCoroutines(); // Shouldn't be necessary
     }
 
     // Thread for duplicating sheeps every 10 seconds
@@ -57,7 +63,7 @@ public class DuplicateSheep : MonoBehaviour
                 yield return new WaitForSeconds(mutationTime);
                 Instantiate(WolfPrefab, transform.position, transform.rotation);
                 Debug.Log("...done!");
-                isInfected = false;
+                isInfected = false; // Should not be necessary
                 Destroy(this.gameObject);
             }
             else
@@ -79,9 +85,20 @@ public class DuplicateSheep : MonoBehaviour
     private Vector3 spawnPosition() 
     {
         Vector3 spawnPos = Vector3.zero;
+        Vector3 dir;
 
-        // Should use a pathfinding. For now, spawn on the direction to center (actually -pos)
-        spawnPos = transform.position - spawnSheepOffset*transform.position/transform.position.magnitude; 
+        // If we are too close to zero, spawn on right or left
+        if (transform.position.magnitude < 0.1f)
+        {
+            dir = Vector3.right;
+        }
+        else
+        {
+            dir = -Vector3.Normalize(transform.position);
+        }
+
+        spawnPos = transform.position + spawnSheepOffset * dir;
+        Debug.Log("Position: "+transform.position.x+", "+transform.position.y+" new: "+spawnPos.x+", "+spawnPos.y);
         return spawnPos;
     }
 

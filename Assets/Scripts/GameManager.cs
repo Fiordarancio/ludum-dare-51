@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,19 +11,9 @@ public class GameManager : MonoBehaviour
 
     bool isRaining = false;
 
-    // UnityEvent to call events on sheep. 
-    // Using custom BoolEvent as Brackeys does
-    [System.Serializable]
-    public class BoolEvent : UnityEvent<bool> {}; // Event that passes a bool
-    
-    BoolEvent InfectionEvent;
+    // Using custom events to let any sheep know it's raining
+    public static event Action<bool> InfectionEvent;
 
-
-    private void Awake() 
-    {
-        if (InfectionEvent == null)    
-            InfectionEvent = new BoolEvent();
-    }
 
     void Start()
     {
@@ -50,14 +41,14 @@ public class GameManager : MonoBehaviour
                 // Stop rain animation
 
                 // Invoke event to disinfect
-                InfectionEvent.Invoke(true);
+                InfectionEvent?.Invoke(true);
             } 
             else 
             {
                 // Start rain animation
 
                 // Invoke event to infect
-                InfectionEvent.Invoke(false);
+                InfectionEvent?.Invoke(false);
             }
             // Wait and toggle rain
             yield return new WaitForSeconds(rainInterval);
