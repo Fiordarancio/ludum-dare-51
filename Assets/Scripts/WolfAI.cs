@@ -5,17 +5,20 @@ using Pathfinding;
 
 public class WolfAI : MonoBehaviour
 {
-    
     public float speed = 3f;
     public float nextWaypointDistance = 1f;
+    public float eatingTime = 2f;
+
+    Seeker seeker;
+    Rigidbody2D rb;
 
     Transform target = null;
     Path path;
     int currentWaypoint;
     bool reachedEndOfPath = false;
 
-    Seeker seeker;
-    Rigidbody2D rb;
+    Collision2D contactSheep;
+    float contactTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -86,7 +89,7 @@ public class WolfAI : MonoBehaviour
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
-        rb.AddForce(force);
+        rb.AddForce(force, ForceMode2D.Impulse);
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
 
@@ -97,8 +100,32 @@ public class WolfAI : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Sheep"))
         {
-            Debug.Log("Eaten!");
-            Destroy(other.gameObject);
+            Debug.Log("Bon appetit!");
+            contactSheep = other;
+            contactTimer = Time.time;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Sheep"))
+        {
+            if (contactTimer + eatingTime < Time.time)
+            {
+                Debug.Log("Eaten!");
+                Destroy(other.gameObject);
+            } else
+            {
+                Debug.Log("Eating!");
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Sheep"))
+        {
+            Debug.Log("Eaten or escaped!");
+            contactSheep = null;
+            contactTimer = 0f;
         }
     }
 }
