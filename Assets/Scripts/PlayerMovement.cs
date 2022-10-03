@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    private bool isFacingRight = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +29,30 @@ public class PlayerMovement : MonoBehaviour
         {
             // Debug.Log(movement);
             transform.Translate(movement);
+
+            // If the input is moving the player right and the player is facing left...
+			if (movement.x > 0 && !isFacingRight)
+			{
+				// ... flip the player.
+				Flip();
+			}
+			// Otherwise if the input is moving the player left and the player is facing right...
+			else if (movement.x < 0 && isFacingRight)
+			{
+				// ... flip the player.
+				Flip();
+			}
         }
+    }
+
+    private void Flip()
+    {
+        // Switch the way the player is labelled as facing.
+		isFacingRight = !isFacingRight;
+
+		// Multiply the player's x local scale by -1.
+		Vector3 theScale = transform.localScale;
+		theScale.x *= -1;
+		transform.localScale = theScale;
     }
 }

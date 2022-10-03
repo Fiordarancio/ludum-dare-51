@@ -19,6 +19,12 @@ public class ShedManager : MonoBehaviour
     [SerializeField]
     LevelManager levelManager;
 
+    [Header("Sounds for lose and win")]
+    [SerializeField]
+    AudioSource audioSource;
+    [SerializeField]
+    AudioClip winClip, loseClip;
+
 
     private void Start() 
     {
@@ -39,6 +45,7 @@ public class ShedManager : MonoBehaviour
             if (activeSheeps.Length == 0 && !isFull())
             {
                 isGameRunning = false;
+                audioSource.PlayOneShot(loseClip);
                 UpdateWinText(true, "You lost :(");
                 levelManager.LoseLevel();
             }
@@ -61,6 +68,7 @@ public class ShedManager : MonoBehaviour
             {
                 // Show menu and load to next scene
                 isGameRunning = false;
+                audioSource.PlayOneShot(winClip);
                 UpdateWinText(true, "You won :D");
                 levelManager.WinLevel();
             }
