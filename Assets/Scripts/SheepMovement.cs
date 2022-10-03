@@ -7,7 +7,7 @@ public class SheepMovement : MonoBehaviour
 
     Vector3 dir;
     public float speed = 200f;
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
 
     private void Awake() 
     {
