@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DuplicateSheep : MonoBehaviour
@@ -20,6 +19,10 @@ public class DuplicateSheep : MonoBehaviour
     public float infectionTime = 10f;       // Total time in which a mutation or duplication happens
     public float mutationTime = 2f;         // Time in which we play animation or mutation
 
+    [Header("Animation")]
+    [SerializeField]
+    private Animator sheepAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +39,7 @@ public class DuplicateSheep : MonoBehaviour
         isInfected = infect;
         if (isInfected == true)
         {
-            Debug.Log(gameObject.name + " infected now!");
+            // Debug.Log(gameObject.name + " infected now!");
             StartCoroutine(ApplyInfection());
         }
         // else
@@ -63,6 +66,7 @@ public class DuplicateSheep : MonoBehaviour
                 // Activate animation for mutation 
                 // TODO: enable dog sensing: sheep does is no more pushable
                 gameObject.tag = "Sheep2Wolf";
+                sheepAnimator.SetBool("Mutating", true);
 
                 // Wait a bit then mutate and die
                 Debug.Log("Mutating...");
