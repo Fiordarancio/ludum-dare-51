@@ -143,11 +143,22 @@ public class WolfAI : MonoBehaviour
 
     public void destroyJoint()
     {
+        Destroy(contactJoint);
+        contactJoint = null;
+
+        if (contactSheep != null)
+        {
+            Vector2 direction = ((Vector2)contactSheep.transform.position - (Vector2)transform.position).normalized;
+            Vector2 force = direction * Time.deltaTime;
+
+            // Push the wolf slightly away
+            if (force.magnitude > 0.001f)
+                transform.Translate(force);
+        }
+
         contactSheep = null;
         contactTimer = 0f;
         inContact = false;
-        Destroy(contactJoint);
-        contactJoint = null;
     }
 
 }
