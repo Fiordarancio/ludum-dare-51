@@ -10,11 +10,7 @@ public class RainManager : MonoBehaviour
     bool isRaining = false;
 
     [SerializeField]
-    Sprite backgroundSunny;
-    [SerializeField]
-    Sprite backgroundRainy;
-    [SerializeField]
-    SpriteRenderer spriteRenderer;
+    Animator rainAnimator;
 
     // Using custom events to let any sheep know it's raining
     public static event Action<bool> InfectionEvent;
@@ -44,14 +40,14 @@ public class RainManager : MonoBehaviour
             if (isRaining)
             {
                 // Start rain animation
-                spriteRenderer.sprite = backgroundRainy;
+                rainAnimator.SetBool("isRaining", true);
                 // Invoke event to infect
                 StartRain();
             }
             else 
             {
                 // Stop rain animation
-                spriteRenderer.sprite = backgroundSunny;
+                rainAnimator.SetBool("isRaining", false);
                 // Invoke event to disinfect
                 StopRain();
             }
