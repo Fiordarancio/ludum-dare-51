@@ -5,7 +5,7 @@ using UnityEngine;
 // If any sheep is in range, push them away when pressing B
 public class ScareSheepInRange : MonoBehaviour
 {
-    List<GameObject> sheepInRange;
+    List<GameObject> sheepInRange, wolvesInRange;
     public float barkStrength = 0f;
     Vector2 barkForce;
 
@@ -24,6 +24,16 @@ public class ScareSheepInRange : MonoBehaviour
         // When the dog barks, sheeps in bark range must be pushed away
         if (Input.GetButtonDown("Bark") && sheepInRange.Count > 0)
         {
+
+            // In there are wolves, detroy joint with sheeps
+            foreach (GameObject wolf in wolvesInRange)
+            {
+                if (wolf != null)
+                {
+                    wolf.GetComponent<WolfAI>()?.destroyJoint();
+                }
+            }
+
             foreach (GameObject sheep in sheepInRange)
             {
                 // Skip if the sheep has been mutated/destroyed but we had still it in range
@@ -37,6 +47,7 @@ public class ScareSheepInRange : MonoBehaviour
                     }
                 }
             }
+            
         }
     }
 
@@ -44,6 +55,8 @@ public class ScareSheepInRange : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Sheep"))
             sheepInRange.Add(other.gameObject);
+        if (other.gameObject.CompareTag("Wolf"))
+            wolvesInRange.Add(other.gameObject);
     }
 
     private void OnTriggerExit2D(Collider2D other) 

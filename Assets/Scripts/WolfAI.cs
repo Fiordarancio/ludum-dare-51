@@ -133,14 +133,21 @@ public class WolfAI : MonoBehaviour
     }
 
     private void OnCollisionExit2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Sheep"))
+        if (other.gameObject.CompareTag("Sheep") && other.gameObject == contactSheep)
         {
             Debug.Log("Eaten or escaped!");
-            contactSheep = null;
-            contactTimer = 0f;
-            inContact = false;
-            Destroy(contactJoint);
-            contactJoint = null;
+            destroyJoint();
         }
     }
+
+
+    public void destroyJoint()
+    {
+        contactSheep = null;
+        contactTimer = 0f;
+        inContact = false;
+        Destroy(contactJoint);
+        contactJoint = null;
+    }
+
 }
