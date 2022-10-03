@@ -45,6 +45,11 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(index);
     }
 
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(currentLevel);
+    }
+
     public void ExitGame ()
     {
         #if UNITY_EDITOR // checks at compilation time if the code is running on the editor
