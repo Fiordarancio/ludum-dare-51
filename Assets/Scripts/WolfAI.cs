@@ -17,16 +17,16 @@ public class WolfAI : MonoBehaviour
     int currentWaypoint;
     bool reachedEndOfPath = false;
 
-    Collision2D contactSheep = null;
+    GameObject contactSheep = null;
     FixedJoint2D contactJoint = null;
     float contactTimer = 0f;
+    bool inContact = false;
 
     // Start is called before the first frame update
     void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-        contactJoint = GetComponent<FixedJoint2D>(); 
 
         InvokeRepeating("UpdatePath", 0f, 0.2f);
     }
@@ -101,28 +101,29 @@ public class WolfAI : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Sheep"))
+        if (other.gameObject.CompareTag("Sheep") && !inContact)
         {
             Debug.Log("Bon appetit!");
-            contactSheep = other;
+            contactSheep = other.gameObject;
             contactTimer = Time.time;
+            inContact = true;
 
+            contactJoint = gameObject.AddComponent<FixedJoint2D>();
+            contactJoint.enableCollision = true; 
             // sets joint position to point of contact
             contactJoint.anchor = other.GetContact(0).point;
             // connects the joint to the other object
             contactJoint.connectedBody = other.GetContact(0).collider.transform.GetComponentInParent<Rigidbody2D>();
-            // Stops objects from continuing to collide and creating more joints
-            //contactJoint.enableCollision = false;
         }
     }
 
     private void OnCollisionStay2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Sheep"))
+        if (other.gameObject.CompareTag("Sheep") && other.gameObject == contactSheep)
         {
             if (contactTimer + eatingTime < Time.time)
             {
                 Debug.Log("Eaten!");
-                Destroy(contactSheep.gameObject);
+                Destroy(contactSheep);
             } else
             {
                 Debug.Log("Eating!");
@@ -137,6 +138,9 @@ public class WolfAI : MonoBehaviour
             Debug.Log("Eaten or escaped!");
             contactSheep = null;
             contactTimer = 0f;
+            inContact = false;
+            Destroy(contactJoint);
+            contactJoint = null;
         }
     }
 }

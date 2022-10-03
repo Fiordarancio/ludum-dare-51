@@ -32,8 +32,8 @@ public class ScareSheepInRange : MonoBehaviour
                     Rigidbody2D sheepRb = sheep.GetComponent<Rigidbody2D>();
                     if (sheepRb != null)
                     {
-                        barkForce = barkStrength * -(dog.position - sheep.transform.position);
-                        sheepRb.AddForce(barkForce, ForceMode2D.Impulse);
+                        barkForce = barkStrength * (dog.position - sheep.transform.position).normalized;
+                        sheepRb.AddForce(-barkForce, ForceMode2D.Impulse);
                     }
                 }
             }

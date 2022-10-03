@@ -97,7 +97,6 @@ GameObject:
   - component: {fileID: 8856195634681318792}
   - component: {fileID: 6863708870332834504}
   - component: {fileID: 1814760327}
-  - component: {fileID: 1257425072}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Wolf
@@ -170,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b7d30579c11224b92420013949fd4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 1.5
   nextWaypointDistance: 1
   eatingTime: 2
 --- !u!114 &1814760327
@@ -201,21 +200,3 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!255 &1257425072
-FixedJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605794426480924674}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 1.45, y: -3.49}
-  m_DampingRatio: 0
-  m_Frequency: 0
