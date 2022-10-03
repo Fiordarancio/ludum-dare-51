@@ -743,7 +743,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text_ShowSheepCollected: {fileID: 582137742}
   text_WinLose: {fileID: 1952662917}
-  waitForReload: 5
   levelManager: {fileID: 1043815437}
 --- !u!61 &1118240830
 BoxCollider2D:
@@ -1936,6 +1935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoCanvas: {fileID: 1952601338}
+  levelManager: {fileID: 1043815437}
 --- !u!4 &2080968823
 Transform:
   m_ObjectHideFlags: 0
