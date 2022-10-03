@@ -23,6 +23,12 @@ public class DuplicateSheep : MonoBehaviour
     [SerializeField]
     private Animator sheepAnimator;
 
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip bleatingClip, howlClip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +80,7 @@ public class DuplicateSheep : MonoBehaviour
                 
                 Instantiate(WolfPrefab, transform.position, transform.rotation);
                 sheepAnimator.SetBool("Mutating", false);
+                audioSource.PlayOneShot(howlClip);
                 Debug.Log("...done!");
                 isInfected = false; // Should not be necessary
                 Destroy(this.gameObject);
@@ -88,6 +95,7 @@ public class DuplicateSheep : MonoBehaviour
 
                 Instantiate(SheepPrefab, spawnPosition(), transform.rotation);
                 sheepAnimator.SetBool("Duplicating", false);
+                audioSource.PlayOneShot(bleatingClip);
                 Debug.Log("...completed!");
             }
         }

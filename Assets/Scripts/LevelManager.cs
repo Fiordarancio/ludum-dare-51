@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour
     public void WinLevel()
     {
         // Show canvas for win level
-        Debug.Log("You won! current level " + currentLevel);
+        Debug.Log("You won!");
 
         StartCoroutine(NextLevel(currentLevel+1));
     }

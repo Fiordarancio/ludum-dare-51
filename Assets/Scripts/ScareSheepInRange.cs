@@ -12,6 +12,11 @@ public class ScareSheepInRange : MonoBehaviour
     [SerializeField]
     Transform dog;
 
+    [SerializeField]
+    AudioSource audioSource;
+    [SerializeField]
+    AudioClip barkSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +30,9 @@ public class ScareSheepInRange : MonoBehaviour
         // When the dog barks, sheeps in bark range must be pushed away
         if (Input.GetButtonDown("Bark") && sheepInRange.Count > 0)
         {
-
+            // Play sound
+            audioSource.PlayOneShot(barkSound);
+            
             // In there are wolves, detroy joint with sheeps
             foreach (GameObject wolf in wolvesInRange)
             {
