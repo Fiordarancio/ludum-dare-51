@@ -8,14 +8,24 @@ public class RainManager : MonoBehaviour
     public float rainInterval = 10f;
 
     bool isRaining = false;
+
     [SerializeField]
-    GameObject backgroundSunny;
+    Sprite backgroundSunny;
     [SerializeField]
-    GameObject backgroundRainy;
+    Sprite backgroundRainy;
+    
+    SpriteRenderer spriteRenderer;
 
     // Using custom events to let any sheep know it's raining
     public static event Action<bool> InfectionEvent;
 
+
+    private void Awake() 
+    {
+        spriteRenderer = GameObject.Find("Background").GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+            Debug.LogError("No Background element in scene!");
+    }
 
     void Start()
     {
@@ -25,13 +35,14 @@ public class RainManager : MonoBehaviour
 
     private void OnDestroy() 
     {
-        InfectionEvent?.Invoke(false);
+        StopRain();
         StopAllCoroutines();
     }
     private void OnDisable() 
     {
-        InfectionEvent?.Invoke(false);
+        StopRain();
         StopAllCoroutines();    
+
     }
 
     private IEnumerator toggleRain()
@@ -40,23 +51,33 @@ public class RainManager : MonoBehaviour
         {
             if (isRaining)
             {
-                // Stop rain animation
-                backgroundRainy.SetActive(true);
-                backgroundSunny.SetActive(false);
-                // Invoke event to disinfect
-                InfectionEvent?.Invoke(true);
-            } 
+                // Start rain animation
+                spriteRenderer.sprite = backgroundRainy;
+                // Invoke event to infect
+                StartRain();
+            }
             else 
             {
                 // Stop rain animation
-                backgroundRainy.SetActive(false);
-                backgroundSunny.SetActive(true);
+                spriteRenderer.sprite = backgroundSunny;
                 // Invoke event to disinfect
-                InfectionEvent?.Invoke(false);
+                StopRain();
             }
-            // Wait and toggle rain
+                StopRain();
+
+            // Wait next toggle
             yield return new WaitForSeconds(rainInterval);
             isRaining = !isRaining;
         }
+    }
+
+    public void StartRain()
+    {
+        InfectionEvent?.Invoke(true);
+    }
+
+    public void StopRain()
+    {
+        InfectionEvent?.Invoke(false);
     }
 }

@@ -1,49 +1,35 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
+#if UNITY_EDITOR // this directive is set by Unity when we compile and run code in the editor!
+using UnityEditor;
+#endif
 
 // Single instance to be preserved across sessions
 public class GameManager : MonoBehaviour
 {
     // Create a static variable to collect the first instance created of this class 
     // and get it accessible everytime and everywhere. In this way, any instance of
-    // MainManager will have access to the same instance.
+    // GameManager will have access to the same instance.
     public static GameManager _instance;
 
-    RainManager rainManager;
+    // This is the value we really want to be persistent
     int currentLevel;
 
-    // Awake, unlike Start, is called at the very beginning of the scene, when the 
-    // object in the hierarchy is first created
+    // Awake, unlike Start, is called at the very beginning of the scene, 
+    // when the object in the hierarchy is first created
     private void Awake() {
         if (!_instance)
         {
-            _instance = this;    // Initialize by saving the instance the first time 
-                                // => SINGLETON PATTERN
-            DontDestroyOnLoad(gameObject);  // On loading scenes, don't destroy
-
+            _instance = this;               // Initialize by saving the instance the first time 
+                                            // => SINGLETON PATTERN
+            DontDestroyOnLoad(gameObject);   
+            
             // Begin counting levels
-            Debug.Log("First awake");
-            currentLevel = -1;
-            // Check and set the rain manager
-            rainManager = GetComponent<RainManager>();
-            if (rainManager == null)
-                rainManager = gameObject.AddComponent<RainManager>();
+            currentLevel = 0;
         }
         else
             Destroy(gameObject); // Destroy any other object
 
-        Debug.Log("Another awake?");
-        // Select a color if there is one saved
-        currentLevel++;
-    }
-
-    private void Update() 
-    {
-        // Reload scene by pressing R
-        if (Input.GetButtonDown("ReloadScene"))    
-            ReloadLevel();
     }
 
     public int CurrentLevel() 
@@ -55,17 +41,17 @@ public class GameManager : MonoBehaviour
     {
         // Show canvas for win level
         Debug.Log("You won! current level " + currentLevel);
-        // Stop rain and everything
-        rainManager.StopAllCoroutines();
 
-        // Load next scene
-        if (currentLevel == 0)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
-        else
-            ReloadLevel();
+        // // Reload
+        // ReloadLevel();
 
+        // currentLevel++;
+    }
+
+    public void NextLevel()
+    {
         currentLevel++;
-
+        ReloadLevel();
     }
 
     public void LoseLevel()
@@ -79,5 +65,14 @@ public class GameManager : MonoBehaviour
     public void ReloadLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ExitGame ()
+    {
+        #if UNITY_EDITOR // checks at compilation time if the code is running on the editor
+            EditorApplication.ExitPlaymode();
+        #else
+            Application.Quit();
+        #endif
     }
 }

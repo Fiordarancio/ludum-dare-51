@@ -12,15 +12,10 @@ public class ShedManager : MonoBehaviour
     [SerializeField]
     TMP_Text text_ShowSheepCollected;
 
-    private void Awake() 
-    {
-        
-    }
-
     private void Start() 
     {
         // Generate random number of sheep < sheeptocollect in area (for levels < 1)
-        sheepToCollect = GameManager2._instance.CurrentLevel() + 1;    
+        sheepToCollect = GameManager._instance.CurrentLevel() + 1;    
         Debug.Log("Sheep to collect: "+sheepToCollect);
         sheepCollected = 0;
         UpdateText();  
@@ -30,7 +25,7 @@ public class ShedManager : MonoBehaviour
     {
         activeSheeps = GameObject.FindGameObjectsWithTag("Sheep");
         if (activeSheeps.Length == 0 && !isFull())
-            GameManager2._instance.LoseLevel();
+            GameManager._instance.LoseLevel();
     }
 
     // Game Manager manages the shed: when a sheep enters, it
@@ -48,7 +43,7 @@ public class ShedManager : MonoBehaviour
             if (isFull())
             {
                 // Show menu and load to next scene
-                GameManager2._instance.WinLevel();
+                GameManager._instance.WinLevel();
             }
         }
     }
