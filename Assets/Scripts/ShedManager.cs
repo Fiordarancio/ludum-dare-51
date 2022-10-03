@@ -39,7 +39,7 @@ public class ShedManager : MonoBehaviour
             if (activeSheeps.Length == 0 && !isFull())
             {
                 isGameRunning = false;
-                UpdateWinText(false, "You lost :(");
+                UpdateWinText(true, "You lost :(");
                 levelManager.LoseLevel();
             }
         }
