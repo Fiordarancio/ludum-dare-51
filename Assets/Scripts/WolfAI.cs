@@ -18,6 +18,7 @@ public class WolfAI : MonoBehaviour
     bool reachedEndOfPath = false;
 
     Collision2D contactSheep = null;
+    FixedJoint2D contactJoint = null;
     float contactTimer = 0f;
 
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class WolfAI : MonoBehaviour
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        contactJoint = GetComponent<FixedJoint2D>(); 
 
         InvokeRepeating("UpdatePath", 0f, 0.2f);
     }
@@ -104,6 +106,13 @@ public class WolfAI : MonoBehaviour
             Debug.Log("Bon appetit!");
             contactSheep = other;
             contactTimer = Time.time;
+
+            // sets joint position to point of contact
+            contactJoint.anchor = other.GetContact(0).point;
+            // connects the joint to the other object
+            contactJoint.connectedBody = other.GetContact(0).collider.transform.GetComponentInParent<Rigidbody2D>();
+            // Stops objects from continuing to collide and creating more joints
+            //contactJoint.enableCollision = false;
         }
     }
 
