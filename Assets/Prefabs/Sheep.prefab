@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5281957188187517285}
   - component: {fileID: 1114097379954931710}
-  - component: {fileID: 630495756905289272}
+  - component: {fileID: 8863104672490342664}
   m_Layer: 0
   m_Name: SheepSprite
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &630495756905289272
+--- !u!95 &8863104672490342664
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -118,7 +118,6 @@ GameObject:
   - component: {fileID: 5349407068209240851}
   - component: {fileID: 1658679919466336439}
   - component: {fileID: 1492383874}
-  - component: {fileID: 703272391352643661}
   m_Layer: 0
   m_Name: Sheep
   m_TagString: Sheep
@@ -197,6 +196,7 @@ MonoBehaviour:
   spawnSheepOffset: 1
   infectionTime: 5
   mutationTime: 2
+  sheepAnimator: {fileID: 8863104672490342664}
 --- !u!114 &1492383874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,23 +210,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
---- !u!95 &703272391352643661
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5349407068209240852}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 53dbc549819c36a4bb8a7629c81521d6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

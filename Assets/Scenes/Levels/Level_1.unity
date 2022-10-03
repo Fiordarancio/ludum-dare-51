@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a055d6e68e6e354eaf814ba437c0de6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rainInterval: 10
+  rainInterval: 5
   backgroundSunny: {fileID: 21300000, guid: ea25101be4e972c4bbb7f69dcb1b0474, type: 3}
   backgroundRainy: {fileID: 21300000, guid: f31dc73d7d4ca7942875bdb7ec92ee51, type: 3}
   spriteRenderer: {fileID: 1701642940}

@@ -71,7 +71,9 @@ public class DuplicateSheep : MonoBehaviour
                 // Wait a bit then mutate and die
                 Debug.Log("Mutating...");
                 yield return new WaitForSeconds(mutationTime);
+                
                 Instantiate(WolfPrefab, transform.position, transform.rotation);
+                sheepAnimator.SetBool("Mutating", false);
                 Debug.Log("...done!");
                 isInfected = false; // Should not be necessary
                 Destroy(this.gameObject);
@@ -79,15 +81,16 @@ public class DuplicateSheep : MonoBehaviour
             else
             {
                 // Activate animation for duplication
-
+                sheepAnimator.SetBool("Duplicating", true);
                 // Wait a bit then create a duplicate (don't destroy yourself)
                 Debug.Log("Duplication...");
                 yield return new WaitForSeconds(mutationTime);
+
                 Instantiate(SheepPrefab, spawnPosition(), transform.rotation);
-                Debug.Log("...complete!");
+                sheepAnimator.SetBool("Duplicating", false);
+                Debug.Log("...completed!");
             }
         }
-        Debug.Log("Ending infection.");
     }
 
     // If there's another object in the spawn position, rigidbodys and colliders 
@@ -108,7 +111,7 @@ public class DuplicateSheep : MonoBehaviour
         }
 
         spawnPos = transform.position + spawnSheepOffset * dir;
-        Debug.Log("Position: "+transform.position.x+", "+transform.position.y+" new: "+spawnPos.x+", "+spawnPos.y);
+        // Debug.Log("Position: "+transform.position.x+", "+transform.position.y+" new: "+spawnPos.x+", "+spawnPos.y);
         return spawnPos;
     }
 

@@ -19,15 +19,10 @@ public class RainManager : MonoBehaviour
     // Using custom events to let any sheep know it's raining
     public static event Action<bool> InfectionEvent;
 
-    private void Awake() {
-        Debug.Log("Rain awake");
-    }
-
     void Start()
     {
         isRaining = false;
         StartCoroutine(toggleRain());
-        Debug.Log("Rain start");
     }
 
     private void OnDestroy() 
