@@ -33,7 +33,7 @@ public class ScareSheepInRange : MonoBehaviour
                     if (sheepRb != null)
                     {
                         barkForce = barkStrength * -(dog.position - sheep.transform.position);
-                        sheepRb.AddForce(barkForce);
+                        sheepRb.AddForce(barkForce, ForceMode2D.Impulse);
                     }
                 }
             }

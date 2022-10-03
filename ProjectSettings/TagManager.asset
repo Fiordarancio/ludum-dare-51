@@ -14,7 +14,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - GameObjects
+  - 
   - Water
   - UI
   - 
@@ -44,9 +44,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: GameObjects
-    uniqueID: 790130243
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

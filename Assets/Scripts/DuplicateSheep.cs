@@ -27,11 +27,11 @@ public class DuplicateSheep : MonoBehaviour
         infectionTime = (infectionTime > mutationTime)? infectionTime : 3f;
 
         // Register for Infect event
-        GameManager.InfectionEvent += onInfect;
+        RainManager.InfectionEvent += OnInfect;
     }
 
     // Event to undestand if rain affected the sheep. Infection is controlled by game manager
-    private void onInfect (bool infect)
+    private void OnInfect (bool infect)
     {
         isInfected = infect;
         if (isInfected == true)
@@ -46,7 +46,7 @@ public class DuplicateSheep : MonoBehaviour
     // Unsubscribe from InfectionEvent when destroyed or an error will popup
     private void OnDisable() 
     {
-        GameManager.InfectionEvent -= onInfect;    
+        RainManager.InfectionEvent -= OnInfect;    
     }
 
     // Thread for duplicating sheeps every 10 seconds
