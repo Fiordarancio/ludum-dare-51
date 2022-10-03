@@ -1251,6 +1251,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 458022092}
     m_Modifications:
+    - target: {fileID: 1492383874, guid: a7b4808e0946fcc48bd327f50ea0891a, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5349407068209240852, guid: a7b4808e0946fcc48bd327f50ea0891a, type: 3}
       propertyPath: m_Name
       value: Sheep
@@ -1927,6 +1931,10 @@ PrefabInstance:
     - target: {fileID: 3044642809896091043, guid: 3cb8543b504b9004388a3f042f8d8893, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3044642810963735810, guid: 3cb8543b504b9004388a3f042f8d8893, type: 3}
+      propertyPath: m_Mass
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3044642810963735811, guid: 3cb8543b504b9004388a3f042f8d8893, type: 3}
       propertyPath: m_Name

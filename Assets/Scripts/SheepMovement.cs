@@ -28,6 +28,6 @@ public class SheepMovement : MonoBehaviour
         dir.y = Random.Range(-1f, +1f);
 
         // transform.Translate(dir * speed * Time.deltaTime);
-        rb.AddForce(dir * speed * Time.deltaTime);
+        rb.AddForce(dir * speed * Time.deltaTime, ForceMode2D.Impulse);
     }
 }

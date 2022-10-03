@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88125b9443e0d9a488bcb9a17059bcba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barkStrength: 20
+  barkStrength: 0.5
   dog: {fileID: 3044642810963735815}
 --- !u!1 &3044642810963735811
 GameObject:
@@ -305,7 +305,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
