@@ -75,7 +75,7 @@ public class WolfAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (path == null)
+        if (path == null || path.vectorPath.Count == 0)
             return;
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - (Vector2)transform.position).normalized;
