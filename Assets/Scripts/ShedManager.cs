@@ -9,8 +9,14 @@ public class ShedManager : MonoBehaviour
     private int sheepToCollect = 0;
     private GameObject[] activeSheeps;
 
+    bool isGameRunning = true;
+
     [SerializeField]
     TMP_Text text_ShowSheepCollected;
+    [SerializeField]
+    TMP_Text text_WinLose;
+    [SerializeField]
+    float waitForReload = 5f;
 
     private void Start() 
     {
@@ -19,20 +25,29 @@ public class ShedManager : MonoBehaviour
         Debug.Log("Sheep to collect: "+sheepToCollect);
         sheepCollected = 0;
         UpdateText();  
+        text_WinLose.gameObject.SetActive(false);
+        
+        isGameRunning = true;
     }
 
     private void Update() 
     {
-        activeSheeps = GameObject.FindGameObjectsWithTag("Sheep");
-        if (activeSheeps.Length == 0 && !isFull())
-            GameManager._instance.LoseLevel();
+        if (isGameRunning)
+        {
+            activeSheeps = GameObject.FindGameObjectsWithTag("Sheep");
+            if (activeSheeps.Length == 0 && !isFull())
+            {
+                isGameRunning = false;
+                StartCoroutine(IssueLose());
+            }
+        }
     }
 
     // Game Manager manages the shed: when a sheep enters, it
     // keeps track of them, destroying objects entering
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if (other.gameObject.CompareTag("Sheep"))    
+        if (other.gameObject.CompareTag("Sheep") && isGameRunning)    
         {
             // Count it
             sheepCollected++;
@@ -43,7 +58,8 @@ public class ShedManager : MonoBehaviour
             if (isFull())
             {
                 // Show menu and load to next scene
-                GameManager._instance.WinLevel();
+                isGameRunning = false;
+                StartCoroutine(IssueWin());
             }
         }
     }
@@ -58,4 +74,19 @@ public class ShedManager : MonoBehaviour
         return (sheepCollected >= sheepToCollect);
     }
     
+    private IEnumerator IssueWin()
+    {
+        text_WinLose.text = "You won :D";
+        text_WinLose.gameObject.SetActive(true);
+        yield return new WaitForSeconds(waitForReload);
+        GameManager._instance.WinLevel();
+    }
+
+    private IEnumerator IssueLose()
+    {
+        text_WinLose.text = "You lost :(";
+        text_WinLose.gameObject.SetActive(true);
+        yield return new WaitForSeconds(waitForReload);
+        GameManager._instance.LoseLevel();
+    }
 }

@@ -173,7 +173,7 @@ MonoBehaviour:
   WolfPrefab: {fileID: 1605794426480924674, guid: fc7775f6e357cfd4da501c1f14cf62f6, type: 3}
   wolfProbability: 0.2
   spawnSheepOffset: 1
-  infectionTime: 3
+  infectionTime: 5
   mutationTime: 2
 --- !u!114 &1492383874
 MonoBehaviour:

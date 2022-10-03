@@ -13,24 +13,21 @@ public class RainManager : MonoBehaviour
     Sprite backgroundSunny;
     [SerializeField]
     Sprite backgroundRainy;
-    
+    [SerializeField]
     SpriteRenderer spriteRenderer;
 
     // Using custom events to let any sheep know it's raining
     public static event Action<bool> InfectionEvent;
 
-
-    private void Awake() 
-    {
-        spriteRenderer = GameObject.Find("Background").GetComponent<SpriteRenderer>();
-        if (spriteRenderer == null)
-            Debug.LogError("No Background element in scene!");
+    private void Awake() {
+        Debug.Log("Rain awake");
     }
 
     void Start()
     {
         isRaining = false;
         StartCoroutine(toggleRain());
+        Debug.Log("Rain start");
     }
 
     private void OnDestroy() 

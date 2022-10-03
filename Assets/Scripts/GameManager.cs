@@ -42,14 +42,6 @@ public class GameManager : MonoBehaviour
         // Show canvas for win level
         Debug.Log("You won! current level " + currentLevel);
 
-        // // Reload
-        // ReloadLevel();
-
-        // currentLevel++;
-    }
-
-    public void NextLevel()
-    {
         currentLevel++;
         ReloadLevel();
     }
