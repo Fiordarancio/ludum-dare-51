@@ -16,6 +16,7 @@ public class ScareSheepInRange : MonoBehaviour
     void Start()
     {
         sheepInRange = new List<GameObject>();
+        wolvesInRange = new List<GameObject>();
     }
 
     // Update is called once per frame
