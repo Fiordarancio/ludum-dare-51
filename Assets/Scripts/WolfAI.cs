@@ -15,7 +15,6 @@ public class WolfAI : MonoBehaviour
     Transform target = null;
     Path path;
     int currentWaypoint;
-    bool reachedEndOfPath = false;
 
     GameObject contactSheep = null;
     FixedJoint2D contactJoint = null;
@@ -79,15 +78,6 @@ public class WolfAI : MonoBehaviour
         if (path == null)
             return;
 
-        if (currentWaypoint >= path.vectorPath.Count)
-        {
-            reachedEndOfPath = true;
-            return;
-        } else
-        {
-            reachedEndOfPath = false;
-        }
-
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - (Vector2)transform.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
@@ -103,7 +93,7 @@ public class WolfAI : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Sheep") && !inContact)
         {
-            Debug.Log("Bon appetit!");
+            // Debug.Log("Bon appetit!");
             contactSheep = other.gameObject;
             contactTimer = Time.time;
             inContact = true;
@@ -122,20 +112,16 @@ public class WolfAI : MonoBehaviour
         {
             if (contactTimer + eatingTime < Time.time)
             {
-                Debug.Log("Eaten!");
+                // Debug.Log("Eaten!");
                 Destroy(contactSheep);
-            } else
-            {
-                Debug.Log("Eating!");
-                Debug.Log(Time.time);
-            }
+            } 
         }
     }
 
     private void OnCollisionExit2D(Collision2D other) {
         if (other.gameObject.CompareTag("Sheep") && other.gameObject == contactSheep)
         {
-            Debug.Log("Eaten or escaped!");
+            // Debug.Log("Eaten or escaped!");
             destroyJoint();
         }
     }

@@ -15,8 +15,6 @@ public class ShedManager : MonoBehaviour
     TMP_Text text_ShowSheepCollected;
     [SerializeField]
     TMP_Text text_WinLose;
-    [SerializeField]
-    float waitForReload = 5f;
 
     [SerializeField]
     LevelManager levelManager;
