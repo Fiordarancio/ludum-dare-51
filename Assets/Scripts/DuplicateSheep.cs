@@ -32,11 +32,15 @@ public class DuplicateSheep : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isInfected = false; 
+        isInfected = false;        
         infectionTime = (infectionTime > mutationTime)? infectionTime : 3f;
 
         // Register for Infect event
         RainManager.InfectionEvent += OnInfect;
+
+        // isInfected should be checked against RainManager.isRaining
+        // (in case this is a duplicated sheep)
+        OnInfect(RainManager.isRaining);
     }
 
     // Event to undestand if rain affected the sheep. Infection is controlled by game manager
@@ -45,7 +49,7 @@ public class DuplicateSheep : MonoBehaviour
         isInfected = infect;
         if (isInfected == true)
         {
-            // Debug.Log(gameObject.name + " infected now!");
+            Debug.Log(gameObject.name + " is infected now!");
             StartCoroutine(ApplyInfection());
         }
         // else
@@ -75,13 +79,13 @@ public class DuplicateSheep : MonoBehaviour
                 sheepAnimator.SetBool("Mutating", true);
 
                 // Wait a bit then mutate and die
-                Debug.Log("Mutating...");
+                // Debug.Log("Mutating...");
                 yield return new WaitForSeconds(mutationTime);
                 
                 Instantiate(WolfPrefab, transform.position, transform.rotation);
                 sheepAnimator.SetBool("Mutating", false);
                 audioSource.PlayOneShot(howlClip);
-                Debug.Log("...done!");
+                // Debug.Log("...done!");
                 isInfected = false; // Should not be necessary
                 Destroy(this.gameObject);
             }
@@ -90,15 +94,16 @@ public class DuplicateSheep : MonoBehaviour
                 // Activate animation for duplication
                 sheepAnimator.SetBool("Duplicating", true);
                 // Wait a bit then create a duplicate (don't destroy yourself)
-                Debug.Log("Duplication...");
+                // Debug.Log("Duplication...");
                 yield return new WaitForSeconds(mutationTime);
 
                 Instantiate(SheepPrefab, spawnPosition(), transform.rotation);
                 sheepAnimator.SetBool("Duplicating", false);
                 audioSource.PlayOneShot(bleatingClip);
-                Debug.Log("...completed!");
+                // Debug.Log("...completed!");
             }
         }
+        Debug.Log("Infection ended in coroutine for: "+gameObject.name);
     }
 
     // If there's another object in the spawn position, rigidbodys and colliders 

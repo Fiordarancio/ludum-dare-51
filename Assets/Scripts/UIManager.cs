@@ -10,8 +10,7 @@ public class UIManager : MonoBehaviour
 
     bool showInfo = false;
 
-    [SerializeField]
-    LevelManager levelManager;
+    // LevelManager levelManager;
 
     private void Start() 
     {
@@ -23,11 +22,11 @@ public class UIManager : MonoBehaviour
     {
         // Reload scene by pressing R
         if (Input.GetButtonDown("Reload"))    
-            levelManager.ReloadLevel();
+            LevelManager._instance.ReloadLevel();
 
         // Exit game by pressing ESC
         if (Input.GetButtonDown("Exit"))
-            levelManager.ExitGame();
+            LevelManager._instance.ExitGame();
 
         if (Input.GetButtonDown("Info"))
             ToggleInfo();

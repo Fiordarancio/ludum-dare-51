@@ -16,8 +16,8 @@ public class ShedManager : MonoBehaviour
     [SerializeField]
     TMP_Text text_WinLose;
 
-    [SerializeField]
-    LevelManager levelManager;
+    // [SerializeField]
+    // LevelManager levelManager;
 
     [Header("Sounds for lose and win")]
     [SerializeField]
@@ -29,7 +29,7 @@ public class ShedManager : MonoBehaviour
     private void Start() 
     {
         // Deduce number of sheep to collect from current level
-        sheepToCollect = levelManager.CurrentLevel();
+        sheepToCollect = LevelManager._instance.CurrentLevel();
         sheepCollected = 0;
         UpdateText();  
         UpdateWinText(false);
@@ -44,10 +44,14 @@ public class ShedManager : MonoBehaviour
             activeSheeps = GameObject.FindGameObjectsWithTag("Sheep");
             if (activeSheeps.Length == 0 && !isFull())
             {
-                isGameRunning = false;
-                audioSource.PlayOneShot(loseClip);
-                UpdateWinText(true, "You lost :(");
-                levelManager.LoseLevel();
+                // Delay if there is a sheep mutating but the player can't see it
+                if (GameObject.FindGameObjectsWithTag("Sheep2Wolf").Length == 0)
+                {
+                    isGameRunning = false;
+                    audioSource.PlayOneShot(loseClip);
+                    UpdateWinText(true, "You lost :(");
+                    LevelManager._instance.LoseLevel();
+                }
             }
         }
     }
@@ -56,22 +60,30 @@ public class ShedManager : MonoBehaviour
     // keeps track of them, destroying objects entering
     private void OnTriggerEnter2D(Collider2D other) 
     {
+        if (isGameRunning)
+        {
+            if (other.gameObject.CompareTag("Sheep") || other.gameObject.CompareTag("Sheep2Wolf"))
+            {
+                // Count it
+                sheepCollected++;
+                // Destroy it
+                Destroy(other.gameObject);
+                // Update score
+                UpdateText();
+                // If we reached the goal, we win
+                if (isFull())
+                {
+                    // Show menu and load to next scene
+                    isGameRunning = false;
+                    audioSource.PlayOneShot(winClip);
+                    UpdateWinText(true, "You won :D");
+                    LevelManager._instance.WinLevel();
+                }
+            }
+        }
         if (other.gameObject.CompareTag("Sheep") && isGameRunning)    
         {
-            // Count it
-            sheepCollected++;
-            UpdateText();
-            // Destroy it
-            Destroy(other.gameObject);
-            // If we reached the goal, we win
-            if (isFull())
-            {
-                // Show menu and load to next scene
-                isGameRunning = false;
-                audioSource.PlayOneShot(winClip);
-                UpdateWinText(true, "You won :D");
-                levelManager.WinLevel();
-            }
+            
         }
     }
     

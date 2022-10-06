@@ -376,6 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  sprite: {fileID: 3044642811055485713}
 --- !u!58 &3044642810963735809
 CircleCollider2D:
   m_ObjectHideFlags: 0

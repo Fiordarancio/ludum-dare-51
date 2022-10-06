@@ -13,12 +13,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     private bool isFacingRight = true;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    [SerializeField]
+    Transform sprite; // the dog sprite to be be flipped
 
     private void FixedUpdate() 
     {
@@ -50,9 +46,9 @@ public class PlayerMovement : MonoBehaviour
         // Switch the way the player is labelled as facing.
 		isFacingRight = !isFacingRight;
 
-		// Multiply the player's x local scale by -1.
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
+		// Multiply the sprite's x local scale by -1.
+        Vector3 spriteScale = sprite.transform.localScale;
+        spriteScale.x *= -1;
+        sprite.transform.localScale = spriteScale;
     }
 }

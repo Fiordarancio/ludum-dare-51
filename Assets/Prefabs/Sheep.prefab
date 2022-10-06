@@ -193,9 +193,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SheepPrefab: {fileID: 5349407068209240852}
   WolfPrefab: {fileID: 1605794426480924674, guid: fc7775f6e357cfd4da501c1f14cf62f6, type: 3}
-  wolfProbability: 0.2
+  wolfProbability: 1
   spawnSheepOffset: 1
-  infectionTime: 3
+  infectionTime: 3.5
   mutationTime: 2
   sheepAnimator: {fileID: 8863104672490342664}
   audioSource: {fileID: 5442780461516825392}
