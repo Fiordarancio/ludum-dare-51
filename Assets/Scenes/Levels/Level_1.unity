@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a055d6e68e6e354eaf814ba437c0de6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rainInterval: 5
+  rainInterval: 10
   rainAnimator: {fileID: 1701642942}
 --- !u!4 &479466647
 Transform:
