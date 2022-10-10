@@ -235,25 +235,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3044642809798390517, guid: 3cb8543b504b9004388a3f042f8d8893, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3044642809896091041, guid: 3cb8543b504b9004388a3f042f8d8893, type: 3}
-      propertyPath: barkStrength
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3044642809896091043, guid: 3cb8543b504b9004388a3f042f8d8893, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3044642810963735811, guid: 3cb8543b504b9004388a3f042f8d8893, type: 3}
       propertyPath: m_Name
       value: Dog
-      objectReference: {fileID: 0}
-    - target: {fileID: 3044642810963735811, guid: 3cb8543b504b9004388a3f042f8d8893, type: 3}
-      propertyPath: m_Layer
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3044642810963735815, guid: 3cb8543b504b9004388a3f042f8d8893, type: 3}
       propertyPath: m_RootOrder
@@ -297,10 +281,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3044642810963735815, guid: 3cb8543b504b9004388a3f042f8d8893, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3044642811055485714, guid: 3cb8543b504b9004388a3f042f8d8893, type: 3}
-      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -23,6 +23,7 @@ public class RainManager : MonoBehaviour
 
     private void OnDestroy() 
     {
+        isRaining = false;
         Debug.Log("Rain onDestroy");
         StopAllCoroutines();
         StopRain(); // Just in case it was raining
@@ -32,14 +33,14 @@ public class RainManager : MonoBehaviour
     {
         while (true)
         {
-            // Wait next toggle
-            yield return new WaitForSeconds(rainInterval);
-            isRaining = !isRaining;
-
             if (isRaining)
                 StartRain();
             else 
                 StopRain();
+
+            // Wait next toggle
+            yield return new WaitForSeconds(rainInterval);
+            isRaining = !isRaining;
         }
     }
 

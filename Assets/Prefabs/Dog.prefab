@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88125b9443e0d9a488bcb9a17059bcba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barkStrength: 0.5
+  barkStrength: 0.8
   dog: {fileID: 3044642810963735815}
   audioSource: {fileID: 8971965089775937130}
   barkSound: {fileID: 8300000, guid: 116f7db68b306a34e8bf1247e10bcc8e, type: 3}
